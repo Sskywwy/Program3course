@@ -7,4 +7,23 @@ services:
     volumes:
       - .:/app
     working_dir: /app
+    depends_on:
+      - postgres
+    environment:
+      - DATABASE_URL=postgresql://user:password@db:5432/mydatabase
     command: uvicorn main:app --host 0.0.0.0 --reload
+
+  postgres:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydatabase
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  
+
+volumes:
+  postgres_data:
