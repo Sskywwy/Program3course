@@ -33,4 +33,4 @@ EXPOSE 8000
 
 # Default command: run Uvicorn serving the FastAPI app in `main.py` as `app`.
 # Adjust `main:app` to match your module and app variable if different.
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

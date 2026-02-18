@@ -1,1 +1,35 @@
+# 1. Python кеш (найголовніше!)
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+
+# 2. Віртуальне середовище (воно локальне, в Docker ми ставимо своє)
+.venv
+venv
+env
+
+# 3. Git (історія змін не потрібна в контейнері, вона важить багато)
+.git
 .gitignore
+
+# 4. Налаштування IDE (VS Code, PyCharm)
+.idea
+.vscode
+*.swp
+
+# 5. Тести та кеш тестів
+.pytest_cache
+.coverage
+htmlcov
+
+# 6. Локальні змінні середовища (безпека!)
+# Краще передавати їх через docker-compose, а не запікати в образ
+.env
+
+# 7. Сам Docker (не обов'язково копіювати інструкцію всередину)
+Dockerfile
+docker-compose.yml
+
+# 8. Системне сміття (Mac/Linux)
+.DS_Store
