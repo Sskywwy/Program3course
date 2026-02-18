@@ -11,7 +11,7 @@ services:
       - postgres
     environment:
       - DATABASE_URL=postgresql://user:password@db:5432/mydatabase
-    command: uvicorn main:app --host 0.0.0.0 --reload
+    command: python main.py
 
   postgres:
     image: postgres:15-alpine
