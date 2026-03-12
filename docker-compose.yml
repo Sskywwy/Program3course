@@ -10,8 +10,22 @@ services:
     depends_on:
       - postgres
     environment:
-      - DATABASE_URL=postgresql://user:password@db:5432/mydatabase
-    command: python main.py
+      # pydantic-settings `Settings` expects individual database connection
+      # pieces to be supplied via environment variables.  We configure them
+      # here; this mirrors what the `.env` file (if used) would provide during
+      # local development.  The `DATABASE_URL` variable previously set was
+      # unused by the application and is therefore removed.
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=user
+      - DB_PASS=password
+      - DB_NAME=mydatabase
+    # Use uvicorn to start the FastAPI app located in app/main.py. The
+    # Dockerfile already provides a sensible default `CMD`, so the command
+    # override can be omitted unless you need customization. If you do override
+    # it, reference the module path (`app.main:app`) instead of a non-existent
+    # `main.py` in the container root.
+    # command: uvicorn app.main:app --host 0.0.0.0 --port 8000
 
   postgres:
     image: postgres:15-alpine
